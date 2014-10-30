@@ -24,7 +24,8 @@ void mexFunction(int nlhs, mxArray *plhs[],
     
     
     auto time_update = mxGetPr(prhs[1]);
-    auto dt = mxGetPr(prhs[2]);
+    auto dt_concentration = mxGetPr(prhs[2]);
+    auto dt_chemotaxis = mxGetPr(prhs[3]);
     
-    myObj->update(time_update, dt);
+    myObj->update(time_update, dt_concentration, dt_chemotaxis);
 }

@@ -46,7 +46,7 @@ public:
         conc_.setup_producer_growth(*mu, *lambda, *a);
     }
     
-    void update(double* total_time, double* dt);
+    void update(double* total_time, double* dt_concentration, double* dt_chemotaxis);
     
     std::pair<int, int> get_concentration_dimensions();
     double* get_concentration();
@@ -56,6 +56,19 @@ public:
     double get_prod_conc_at_colony()
     {
         return conc_.get_producer_conc_at_colony();
+    }
+    
+    double* get_pathway(int idx){
+        double* res = new double[10];
+        
+        auto pw = cells_[idx].get_pathway();
+        
+        for (int i = 0; i < 10; i++){
+            res[i] = pw(i);
+        }
+        
+        return res;           
+        
     }
     
     

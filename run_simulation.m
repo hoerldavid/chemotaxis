@@ -17,13 +17,25 @@ producer_conc = 500000;
 
 mx_setup_producers(ptr, producer_area, producer_conc);
 
-%10 cells
-cells = [[40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25],...
-        [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25],...
-        [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25],...
-         [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25],...
-         [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25]]*scale;
+%50 cells
+%cells = [[40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25],...
+ %       [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25],...
+  %      [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25],...
+   %      [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25],...
+    %     [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25], [40; 25],[40; 25], [40; 25]]*scale;
+  % 1 cell
   
+  %cells = [[40; 25]]* scale;
+  cells = [[35;25]] * scale;
+  cells = [cells, cells];
+  cells = [cells, cells];
+  cells = [cells, cells]; % 8 cells
+  cells = [cells, cells];
+  cells = [cells, cells];
+  cells = [cells, cells];% 64 cells
+  cells = [cells, cells]; % 128 cells
+  cells = [cells, cells]; % 256 cells
+  % end 1 Cell
 mx_insert_cells(ptr, cells);
 
 % D, a, p
@@ -44,65 +56,107 @@ fw.ffmpeg = '/usr/local/bin/ffmpeg';
             conc = mx_get_concentration(ptr);
 
             fh = figure;
-            set(gcf,'Position',[0,0,1200,300])
-
-            subplot(1,3,1)
-            hold;
-            line(border(1,:), border(2,:));
-            scatter(res(1,:), res(2,:));
-            subplot(1,3,2)
-            surf(conc);
-            view(0,90)
-            colorbar
-            colormap(cmap)
-            caxis([-1,10])
-            fw.getFrame();
+            set(gcf,'Position',[0,0,800,600])
+% 
+%             subplot(2,3,1)
+%             hold;
+%             line(border(1,:), border(2,:));
+%             scatter(res(1,:), res(2,:));
+%             subplot(2,3,2)
+%             surf(conc);
+%             view(0,90)
+%             colorbar
+%             colormap(cmap)
+%             caxis([-1,10])
+%             fw.getFrame();
            
-growth_curve = [];    
+growth_curve = [];
+pathway = [];
     
 nt = 60*60;
 
 for i = 1:nt
 
-    dt = 1;
-    mx_update_simulation(ptr, dt, .1);
+    dt = 1; % time to update
+    dt_conc = .1; % dt for concentration / producer growth
+    dt_ct = .02; % dt for chemotaxis pathway
+    % 
+    mx_update_simulation(ptr, dt, dt_conc, dt_ct);
     res_old = res;
     res = mx_get_cell_positions(ptr);
     
     conc = mx_get_concentration(ptr);
     
+   % pathway = [pathway, mx_get_pathway_status(ptr, [0])];
+    
     growth_curve = [growth_curve, [i;mx_get_producer_conc(ptr)]];
     
     
     clf
-    subplot(1,3,1)
-    
+%     subplot(1,3,1)
+%     
+%     
+%     hold off
+%     line(border(1,:), border(2,:));
+%     hold on
+%     scatter(res(1,:), res(2,:),20,'filled','k');
+%    % scatter(res(1:1), res(2,1), 20, 'filled', 'r');
+%     xlim([0,50]*scale)
+%     ylim([0,50]*scale)
+%     title(['locations at t=' num2str(dt*i)])
+%     axis square
+%     drawnow
+%     subplot(1,3,2)
     hold off
-    line(border(1,:), border(2,:));
-    hold on
-    scatter(res(1,:), res(2,:),20,'filled','k');
-    xlim([0,50]*scale)
-    ylim([0,50]*scale)
-    title(['locations at t=' num2str(dt*i)])
-    axis square
-    drawnow
-    subplot(1,3,2)
-    hold off
+                 set(gca,'FontSize',40)
+                 set(gca,'LineWidth',2)
     surf(conc');
+    shading flat
+    hold on
+    scatter3(res(1,:)/scale+1, res(2,:)/scale+1, 40*ones(1,size(res(1,:),2)),40,'filled','k');
     view(0,90);
     xlim([1,50])
     ylim([1,50])
+    set(gca,'XTickLabel',{num2str(5),num2str(10),num2str(15),num2str(20),num2str(25)})
+        set(gca,'YTickLabel',{num2str(5),num2str(10),num2str(15),num2str(20),num2str(25)})
+    title(['locations at t=' num2str(dt*i)])
                 colorbar
                 colormap(cmap)
-            caxis([-1,10])
+                set(gca,'FontSize',40)
+                set(gca,'LineWidth',2)
+            caxis([-1,4])
+   
             axis square
+            box on
+
     drawnow
-    subplot(1,3,3)
-    plot(dt*1:i,growth_curve(2,:),'k*-')
-    xlabel('time')
-    ylabel('cell density')
-    set(gca,'YScale','log')
-    xlim([0,nt*dt])
+%     subplot(1,3,3)
+%     plot(dt*1:i,growth_curve(2,:),'k*-')
+%     xlabel('time')
+%     ylabel('cell density')
+%     set(gca,'YScale','log')
+%     xlim([0,nt*dt])
+    
+    
+%     subplot(2,4,4)
+%     plot(dt*1:i,pathway(1,:),'k*-')
+%     ylabel('0 conc')
+%     
+%      subplot(2,4,5)
+%     plot(dt*1:i,pathway(2,:),'k*-')
+%     ylabel('1 conc')
+%     
+%      subplot(2,4,6)
+%     plot(dt*1:i,pathway(3,:),'k*-')
+%     ylabel('2 conc')
+%     subplot(2,4,7)
+%     plot(dt*1:i,pathway(4,:),'k*-')
+%     ylabel('3 conc')
+%     subplot(2,4,8)
+%     plot(dt*1:i,pathway(5,:),'k*-')
+%     ylabel('4 conc')
+    
+    
     fw.getFrame()
 end
 mx_dealloc_simulation(ptr);

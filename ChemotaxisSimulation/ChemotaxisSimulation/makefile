@@ -26,6 +26,7 @@ default:
 					$(MEX) $(BOOSTFLAG) ./mx_set_diffusion_params.cpp ./bac_conc_combined.o ./geometry.o ./random.o ./simulation_wrapper.o
 					$(MEX) $(BOOSTFLAG) ./mx_set_growth_params.cpp ./bac_conc_combined.o ./geometry.o ./random.o ./simulation_wrapper.o
 					$(MEX) $(BOOSTFLAG) ./mx_get_producer_conc.cpp ./bac_conc_combined.o ./geometry.o ./random.o ./simulation_wrapper.o
+					$(MEX) $(BOOSTFLAG) ./mx_get_pathway_status.cpp ./bac_conc_combined.o ./geometry.o ./random.o ./simulation_wrapper.o
 
 clean:
 					rm *.o

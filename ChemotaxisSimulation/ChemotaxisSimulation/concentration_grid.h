@@ -11,12 +11,14 @@
 
 #include <stdio.h>
 #include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
 #include <cmath>
 
 #include "geometry.h"
 
 
 typedef boost::numeric::ublas::matrix< double > concentration_state_type;
+typedef boost::numeric::ublas::vector< double > concentration_state_vector_type;
 
 struct concentration_ode
 {
@@ -25,31 +27,44 @@ struct concentration_ode
     double p; // production rate
     double a; // degradation rate
     
+    size_t rows_;
+    size_t cols_;
+    
     concentration_ode(concentration_state_type* _prod_conc, double _D, double _a, double _p) :
             prod_conc(_prod_conc), D(_D), a(_a), p(_p) {}
     
-    void operator()( const concentration_state_type &x , concentration_state_type &dxdt , double /* t */ ) const
+    const double& at_const(const boost::numeric::ublas::vector<double> &vec, size_t row, size_t col) const
     {
-        size_t size1 = x.size1() , size2 = x.size2();
+        return vec(row* cols_ + col);
+    }
+    
+    void set_dims(size_t rows, size_t cols){
+        rows_ = rows;
+        cols_ = cols;
+    }
+    
+    void operator()( const concentration_state_vector_type &x , concentration_state_vector_type &dxdt , double /* t */ ) const
+    {
+        size_t size1 = cols_ , size2 = rows_;
         
         for( size_t i=0 ; i<size1 ; ++i )
         {
             for( size_t j=0 ; j<size2 ; ++j )
             {
                 
-                if (x(i, j) == -1){ // no change outside of arena
-                    dxdt(i,j) = 0;
+                if (at_const(x, i, j) == -1){ // no change outside of arena
+                    dxdt(i * cols_ + j) = 0;
                     continue;
                 }
                 
                 double diff = 0;
                 
-                if (i > 0 && x( i - 1 , j ) != -1) {diff += x( i - 1 , j ) - x( i , j );}
-                if (i < size1 -1 && x( i + 1 , j ) != -1) {diff += x( i + 1 , j ) - x( i , j );}
-                if (j > 0 && x( i , j - 1 ) != -1) {diff += x( i , j - 1 ) - x( i , j );}
-                if (j < size2 -1 && x( i , j + 1 ) != -1) {diff += x( i , j + 1 ) - x( i , j );}
+                if (i > 0 && at_const(x, i - 1 , j ) != -1) {diff += at_const(x, i - 1 , j ) - at_const(x, i , j );}
+                if (i < size1 -1 && at_const(x, i + 1 , j ) != -1) {diff += at_const(x, i + 1 , j ) - at_const(x, i , j );}
+                if (j > 0 && at_const(x, i , j - 1 ) != -1) {diff += at_const(x, i , j - 1 ) - at_const(x, i , j );}
+                if (j < size2 -1 && at_const(x, i , j + 1 ) != -1) {diff += at_const(x, i , j + 1 ) - at_const(x, i , j );}
                 
-                dxdt( i , j ) = diff * D + p * (*prod_conc)(i, j) - a * x(i, j);
+                dxdt( i * cols_ + j ) = diff * D + p * (*prod_conc)(i, j) - a * at_const(x,i, j);
             }
         }
     }

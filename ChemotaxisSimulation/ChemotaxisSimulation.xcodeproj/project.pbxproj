@@ -10,16 +10,27 @@
 		631F04FC19EDB06300E93DFE /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F04FB19EDB06300E93DFE /* geometry.cpp */; };
 		631F04FE19EDB11200E93DFE /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F04FD19EDB11200E93DFE /* random.cpp */; };
 		631F050419EECAF000E93DFE /* simulation_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F050219EECAF000E93DFE /* simulation_wrapper.cpp */; };
-		6341482E19F18ADC00CF9513 /* mx_get_producer_conc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6341482D19F18ADC00CF9513 /* mx_get_producer_conc.cpp */; };
-		6360A2D019F0B2080084EA3D /* mx_get_concentration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6360A2CF19F0B2080084EA3D /* mx_get_concentration.cpp */; };
-		6360A2D119F0B2C50084EA3D /* concentration_grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F04FF19EDBED200E93DFE /* concentration_grid.cpp */; };
-		6360A2D219F0B2C80084EA3D /* ecoli_bacterium.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63DB0B2A19EC7FD200818A40 /* ecoli_bacterium.cpp */; };
-		6360A2D419F0BB3E0084EA3D /* mx_set_diffusion_params.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6360A2D319F0BB3E0084EA3D /* mx_set_diffusion_params.cpp */; };
-		6360A2D619F0BC260084EA3D /* mx_set_growth_params.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6360A2D519F0BC260084EA3D /* mx_set_growth_params.cpp */; };
+		634D6DAD19F9A1220033784C /* ecoli_bacterium.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63DB0B2A19EC7FD200818A40 /* ecoli_bacterium.cpp */; };
+		634D6DAE19F9A1250033784C /* concentration_grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F04FF19EDBED200E93DFE /* concentration_grid.cpp */; };
+		634D6DB619F9A7BA0033784C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 634D6DB519F9A7BA0033784C /* main.cpp */; };
+		634D6DBA19F9A7EE0033784C /* ecoli_bacterium.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63DB0B2A19EC7FD200818A40 /* ecoli_bacterium.cpp */; };
+		634D6DBB19F9A7F20033784C /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F04FB19EDB06300E93DFE /* geometry.cpp */; };
+		634D6DBC19F9A7F40033784C /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F04FD19EDB11200E93DFE /* random.cpp */; };
+		634D6DBD19F9A7F70033784C /* concentration_grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F04FF19EDBED200E93DFE /* concentration_grid.cpp */; };
+		634D6DBE19F9A7F90033784C /* simulation_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 631F050219EECAF000E93DFE /* simulation_wrapper.cpp */; };
 		63DB0B2319EC696F00818A40 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63DB0B2219EC696F00818A40 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		634D6DB119F9A7BA0033784C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		63DB0B1D19EC696F00818A40 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,6 +57,9 @@
 		631F050219EECAF000E93DFE /* simulation_wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simulation_wrapper.cpp; sourceTree = "<group>"; };
 		631F050319EECAF000E93DFE /* simulation_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simulation_wrapper.h; sourceTree = "<group>"; };
 		6341482D19F18ADC00CF9513 /* mx_get_producer_conc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mx_get_producer_conc.cpp; path = ChemotaxisSimulation/mx_get_producer_conc.cpp; sourceTree = "<group>"; };
+		634D6DB319F9A7BA0033784C /* Chemotaxis2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chemotaxis2; sourceTree = BUILT_PRODUCTS_DIR; };
+		634D6DB519F9A7BA0033784C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		634D6DBF19F9B46B0033784C /* mx_get_pathway_status.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mx_get_pathway_status.cpp; path = ChemotaxisSimulation/mx_get_pathway_status.cpp; sourceTree = "<group>"; };
 		6360A2CD19F0AC360084EA3D /* mx_insert_cells.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mx_insert_cells.cpp; path = ChemotaxisSimulation/mx_insert_cells.cpp; sourceTree = "<group>"; };
 		6360A2CF19F0B2080084EA3D /* mx_get_concentration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mx_get_concentration.cpp; path = ChemotaxisSimulation/mx_get_concentration.cpp; sourceTree = "<group>"; };
 		6360A2D319F0BB3E0084EA3D /* mx_set_diffusion_params.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mx_set_diffusion_params.cpp; path = ChemotaxisSimulation/mx_set_diffusion_params.cpp; sourceTree = "<group>"; };
@@ -58,6 +72,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		634D6DB019F9A7BA0033784C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63DB0B1C19EC696F00818A40 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -82,8 +103,17 @@
 				6360A2D319F0BB3E0084EA3D /* mx_set_diffusion_params.cpp */,
 				6360A2D519F0BC260084EA3D /* mx_set_growth_params.cpp */,
 				6341482D19F18ADC00CF9513 /* mx_get_producer_conc.cpp */,
+				634D6DBF19F9B46B0033784C /* mx_get_pathway_status.cpp */,
 			);
 			name = matlab_interface;
+			sourceTree = "<group>";
+		};
+		634D6DB419F9A7BA0033784C /* Chemotaxis2 */ = {
+			isa = PBXGroup;
+			children = (
+				634D6DB519F9A7BA0033784C /* main.cpp */,
+			);
+			path = Chemotaxis2;
 			sourceTree = "<group>";
 		};
 		63DB0B1619EC696F00818A40 = {
@@ -91,6 +121,7 @@
 			children = (
 				631B879519F06DC100952169 /* matlab_interface */,
 				63DB0B2119EC696F00818A40 /* chemotaxis_simulation */,
+				634D6DB419F9A7BA0033784C /* Chemotaxis2 */,
 				63DB0B2019EC696F00818A40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				63DB0B1F19EC696F00818A40 /* ChemotaxisSimulation */,
+				634D6DB319F9A7BA0033784C /* Chemotaxis2 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,6 +158,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		634D6DB219F9A7BA0033784C /* Chemotaxis2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 634D6DB719F9A7BB0033784C /* Build configuration list for PBXNativeTarget "Chemotaxis2" */;
+			buildPhases = (
+				634D6DAF19F9A7BA0033784C /* Sources */,
+				634D6DB019F9A7BA0033784C /* Frameworks */,
+				634D6DB119F9A7BA0033784C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chemotaxis2;
+			productName = Chemotaxis2;
+			productReference = 634D6DB319F9A7BA0033784C /* Chemotaxis2 */;
+			productType = "com.apple.product-type.tool";
+		};
 		63DB0B1E19EC696F00818A40 /* ChemotaxisSimulation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63DB0B2619EC696F00818A40 /* Build configuration list for PBXNativeTarget "ChemotaxisSimulation" */;
@@ -152,6 +201,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "David Hörl";
 				TargetAttributes = {
+					634D6DB219F9A7BA0033784C = {
+						CreatedOnToolsVersion = 6.1;
+					};
 					63DB0B1E19EC696F00818A40 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -170,31 +222,61 @@
 			projectRoot = "";
 			targets = (
 				63DB0B1E19EC696F00818A40 /* ChemotaxisSimulation */,
+				634D6DB219F9A7BA0033784C /* Chemotaxis2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		634D6DAF19F9A7BA0033784C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				634D6DBC19F9A7F40033784C /* random.cpp in Sources */,
+				634D6DB619F9A7BA0033784C /* main.cpp in Sources */,
+				634D6DBA19F9A7EE0033784C /* ecoli_bacterium.cpp in Sources */,
+				634D6DBD19F9A7F70033784C /* concentration_grid.cpp in Sources */,
+				634D6DBE19F9A7F90033784C /* simulation_wrapper.cpp in Sources */,
+				634D6DBB19F9A7F20033784C /* geometry.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63DB0B1B19EC696F00818A40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6341482E19F18ADC00CF9513 /* mx_get_producer_conc.cpp in Sources */,
-				6360A2D619F0BC260084EA3D /* mx_set_growth_params.cpp in Sources */,
 				631F04FE19EDB11200E93DFE /* random.cpp in Sources */,
+				634D6DAE19F9A1250033784C /* concentration_grid.cpp in Sources */,
 				63DB0B2319EC696F00818A40 /* main.cpp in Sources */,
 				631F050419EECAF000E93DFE /* simulation_wrapper.cpp in Sources */,
-				6360A2D219F0B2C80084EA3D /* ecoli_bacterium.cpp in Sources */,
+				634D6DAD19F9A1220033784C /* ecoli_bacterium.cpp in Sources */,
 				631F04FC19EDB06300E93DFE /* geometry.cpp in Sources */,
-				6360A2D419F0BB3E0084EA3D /* mx_set_diffusion_params.cpp in Sources */,
-				6360A2D119F0B2C50084EA3D /* concentration_grid.cpp in Sources */,
-				6360A2D019F0B2080084EA3D /* mx_get_concentration.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		634D6DB819F9A7BB0033784C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		634D6DB919F9A7BB0033784C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		63DB0B2419EC696F00818A40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -284,6 +366,7 @@
 		63DB0B2719EC696F00818A40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -298,6 +381,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		634D6DB719F9A7BB0033784C /* Build configuration list for PBXNativeTarget "Chemotaxis2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				634D6DB819F9A7BB0033784C /* Debug */,
+				634D6DB919F9A7BB0033784C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		63DB0B1A19EC696F00818A40 /* Build configuration list for PBXProject "ChemotaxisSimulation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

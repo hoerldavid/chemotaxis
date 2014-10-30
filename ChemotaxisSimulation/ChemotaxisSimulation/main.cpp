@@ -25,7 +25,8 @@ int main(int argc, const char * argv[]) {
     
     simulation_wrapper sim;
     double border[26] = { 0,0,0,50,20,50,20,30,30,30,30,50,50,50,50,0,30,0,30,20,20,20,20,0,0,0 };
-    sim.setup_border(border, 26);
+    double border_width = 1;
+    sim.setup_border(border, 26, &border_width);
     double prods[4] = {5, 20, 15, 30};
     double prod_conc = 20;
     sim.setup_producers(prods, &prod_conc);

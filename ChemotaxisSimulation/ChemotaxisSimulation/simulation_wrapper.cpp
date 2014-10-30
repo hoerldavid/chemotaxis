@@ -65,23 +65,38 @@ void simulation_wrapper::setup_producers(double* rect, double* conc)
     conc_.setup_producer_conc(*conc, point2d(rect[0], rect[1]), point2d(rect[2], rect[3]));
 }
 
-void simulation_wrapper::update(double* total_time, double* dt)
+void simulation_wrapper::update(double* total_time, double* dt_concentration, double* dt_chemotaxis)
 {
     double target_time = t_ + *total_time;
-    while (t_ < target_time) {
-        conc_.update_producer_conc(t_);
-        conc_.update_conc(*dt);
+    
+    double t_conc = t_;
+    double t_chemo = t_;
+    
+    double t_conc_next = t_;
+    double t_chemo_next = t_;
+    
+    while ((t_conc < target_time) || (t_chemo < target_time)) {
         
-        for (auto& b : cells_)
-        {
-            auto t_p = b.get_position();
-            double t_c = conc_.get_conc_at_point(t_p);
-            b.set_concentration(t_c);
+        if (t_conc_next <= t_chemo_next){
+            conc_.update_producer_conc(t_conc);
+            conc_.update_conc(*dt_concentration);
+            t_conc += *dt_concentration;
+            t_conc_next += *dt_concentration;
+            t_+= *dt_concentration;
             
-            b.update_bacterium(*dt, rng_, border_);
+        } else {
+            for (auto& b : cells_)
+            {
+                auto t_p = b.get_position();
+                double t_c = conc_.get_conc_at_point(t_p);
+                b.set_concentration(t_c);
+                
+                b.update_bacterium(*dt_chemotaxis, rng_, border_);
+                
+            }
+            t_chemo += *dt_chemotaxis;
+            t_chemo_next += *dt_chemotaxis;
         }
-        
-        t_ += *dt;
     }
     
 }

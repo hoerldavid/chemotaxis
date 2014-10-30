@@ -34,6 +34,8 @@ public:
     void run(double dt, polygon_type& poly);
     
     point2d get_position();
+    
+    boost::numeric::ublas::vector< double > get_pathway(){return pathway_;}
     void set_concentration(double conc);
     
 };

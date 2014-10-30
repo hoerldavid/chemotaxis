@@ -8,8 +8,7 @@
 
 #include <limits>
 #include <boost/geometry.hpp>
-#include <boost/numeric/odeint/stepper/runge_kutta4.hpp>
-#include <boost/numeric/odeint/integrate/integrate_const.hpp>
+#include <boost/numeric/odeint.hpp>
 #include <boost/geometry/geometries/point_xy.hpp>
 #include <boost/geometry/geometries/polygon.hpp>
 #include <boost/numeric/ublas/matrix_proxy.hpp>
@@ -143,13 +142,33 @@ void concentration_grid::update_conc(double dt){
     
     using namespace boost::numeric::odeint;
     
-    //typedef runge_kutta_dopri5<concentration_state_type> stepper_t;
+    // copy to vector
+    concentration_state_vector_type t_c(conc_.size1() * conc_.size2());
+    for (int i = 0; i < conc_.size1(); i++) {
+        for (int j = 0; j < conc_.size2(); j++){
+            t_c[i * conc_.size2() + j] = conc_(i, j);
+        }
+    }
     
-    typedef runge_kutta4<concentration_state_type> stepper_t;
+    // internal step size
+    double h = (dt/10 > 0.01) ? 0.01 : dt/10;
+    
+    typedef runge_kutta_dopri5<concentration_state_vector_type> stepper_t;
+    
+    //typedef runge_kutta4<concentration_state_vector_type> stepper_t;
 
-    //auto stepper = make_controlled(1.0e-6, 1.0e-6, stepper_t());
+    auto stepper = make_controlled(1.0e-6, 1.0e-6, stepper_t());
     
     concentration_ode ode(&prod_conc_, D, a, p);
-    size_t steps = integrate_const( stepper_t() , ode ,
-                    conc_ , 0.0 , dt, 0.01 ); // TODO: implicit euler doesnt work! stepsize??
+    ode.set_dims(conc_.size1(), conc_.size2());
+    
+    size_t steps = integrate_adaptive( stepper , ode ,
+                    t_c , 0.0 , dt, h ); // TODO: implicit euler doesnt work! stepsize??
+    
+    // copy back to matrix
+    for (int i = 0; i < conc_.size1(); i++) {
+        for (int j = 0; j < conc_.size2(); j++){
+            conc_(i, j) = t_c[i * conc_.size2() + j];
+        }
+    }
 }
